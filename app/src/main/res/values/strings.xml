@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Class Diary</string>
+    <string name="student1.name">Mario</string>
+    <string name="student1.curso">Piloto</string>
+    <string name="student1.nota">10</string>
+    <string name="student1.faltas">5</string>
+</resources>
