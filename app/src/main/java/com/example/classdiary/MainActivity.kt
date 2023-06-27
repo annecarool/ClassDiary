@@ -8,13 +8,18 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -32,8 +37,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -82,19 +90,36 @@ fun ClassDiaryStructure() {
             .padding(20.dp)
     ) {
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.mario),
-                contentDescription = null
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(150.dp)
+                    .border(
+                        width = (1.dp),
+                        color = Color(255, 255, 255),
+                        CircleShape
+                    )
+                    .clip(CircleShape)
             )
 
             Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
+                    .fillMaxWidth()
                     .animateContentSize(
                         animationSpec = spring(
                             dampingRatio = Spring.DampingRatioNoBouncy,
                             stiffness = Spring.StiffnessMedium
+
                         )
                     )
             ) {
@@ -102,9 +127,9 @@ fun ClassDiaryStructure() {
                     text = stringResource(id = R.string.student1_name),
                     modifier = Modifier
                         .clickable { expandir = !expandir }
-                        .padding(20.dp),
+                        .padding(bottom = 20.dp),
                     textAlign = TextAlign.Center,
-                    fontSize = 20.sp,
+                    fontSize = 30.sp,
                     color = Color(0, 0, 0),
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Normal
@@ -113,8 +138,7 @@ fun ClassDiaryStructure() {
                 Text(
                     text = stringResource(id = R.string.student1_curso),
                     modifier = Modifier
-                        .clickable { expandir = !expandir }
-                        .padding(20.dp),
+                        .clickable { expandir = !expandir },
                     textAlign = TextAlign.Center,
                     fontSize = 20.sp,
                     color = Color(0, 0, 0),
@@ -123,14 +147,12 @@ fun ClassDiaryStructure() {
                 )
 
                 if (expandir == true) {
+
                     Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier
-                            .animateContentSize(
-                                animationSpec = spring(
-                                    dampingRatio = Spring.DampingRatioNoBouncy,
-                                    stiffness = Spring.StiffnessMedium
-                                )
-                            )
+                            .fillMaxWidth()
                     ) {
                         Text(
                             text = stringResource(id = R.string.student1_nota),
@@ -156,11 +178,13 @@ fun ClassDiaryStructure() {
 
                     }
                 }
-
             }
 
+            Spacer(modifier = Modifier.width(20.dp))
             ExpandInformation(expandir = false, onClick = { expandir = !expandir })
+
         }
+
     }
 
 }
