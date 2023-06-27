@@ -89,100 +89,102 @@ fun ClassDiaryStructure() {
             .fillMaxWidth()
             .padding(20.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(20.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.mario),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(150.dp)
-                    .border(
-                        width = (1.dp),
-                        color = Color(255, 255, 255),
-                        CircleShape
-                    )
-                    .clip(CircleShape)
-            )
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioNoBouncy,
+                        stiffness = Spring.StiffnessMedium
 
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    )
+                )
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .animateContentSize(
-                        animationSpec = spring(
-                            dampingRatio = Spring.DampingRatioNoBouncy,
-                            stiffness = Spring.StiffnessMedium
-
-                        )
-                    )
+                    .padding(20.dp)
             ) {
-                Text(
-                    text = stringResource(id = R.string.student1_name),
+                Image(
+                    painter = painterResource(id = R.drawable.mario),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .clickable { expandir = !expandir }
-                        .padding(bottom = 20.dp),
-                    textAlign = TextAlign.Center,
-                    fontSize = 30.sp,
-                    color = Color(0, 0, 0),
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Normal
+                        .size(120.dp)
+                        .border(
+                            width = (1.dp),
+                            color = Color(255, 255, 255),
+                            CircleShape
+                        )
+                        .clip(CircleShape)
                 )
-
-                Text(
-                    text = stringResource(id = R.string.student1_curso),
+                Column(
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .clickable { expandir = !expandir },
-                    textAlign = TextAlign.Center,
-                    fontSize = 20.sp,
-                    color = Color(0, 0, 0),
-                    fontFamily = FontFamily.SansSerif,
-                    fontWeight = FontWeight.Normal
-                )
-
-                if (expandir == true) {
-
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.student1_name),
                         modifier = Modifier
-                            .fillMaxWidth()
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.student1_nota),
-                            modifier = Modifier
-                                .padding(20.dp),
-                            textAlign = TextAlign.Center,
-                            fontSize = 20.sp,
-                            color = Color(0, 0, 0),
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Normal
-                        )
+                            .clickable { expandir = !expandir }
+                            .padding(bottom = 10.dp),
+                        textAlign = TextAlign.Center,
+                        fontSize = 30.sp,
+                        color = Color(0, 0, 0),
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Normal
+                    )
 
-                        Text(
-                            text = stringResource(id = R.string.student1_faltas),
-                            modifier = Modifier
-                                .padding(20.dp),
-                            textAlign = TextAlign.Center,
-                            fontSize = 20.sp,
-                            color = Color(0, 0, 0),
-                            fontFamily = FontFamily.SansSerif,
-                            fontWeight = FontWeight.Normal
-                        )
-
-                    }
+                    Text(
+                        text = stringResource(id = R.string.student1_curso),
+                        modifier = Modifier
+                            .clickable { expandir = !expandir },
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp,
+                        color = Color(0, 0, 0),
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Normal
+                    )
                 }
+                ExpandInformation(expandir = false, onClick = { expandir = !expandir })
             }
 
-            Spacer(modifier = Modifier.width(20.dp))
-            ExpandInformation(expandir = false, onClick = { expandir = !expandir })
+            if (expandir == true) {
 
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.student1_nota),
+                        modifier = Modifier
+                            .padding(20.dp),
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp,
+                        color = Color(0, 0, 0),
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Normal
+                    )
+
+                    Text(
+                        text = stringResource(id = R.string.student1_faltas),
+                        modifier = Modifier
+                            .padding(20.dp),
+                        textAlign = TextAlign.Center,
+                        fontSize = 20.sp,
+                        color = Color(0, 0, 0),
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Normal
+                    )
+
+                }
+            }
         }
 
     }
