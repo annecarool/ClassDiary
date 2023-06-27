@@ -78,6 +78,7 @@ fun AppClassDiary() {
 @Preview
 @Composable
 fun ClassDiaryStructure() {
+
     var expandir by remember { mutableStateOf(false) }
 
     Card(
@@ -150,7 +151,17 @@ fun ClassDiaryStructure() {
                         fontWeight = FontWeight.Normal
                     )
                 }
-                ExpandInformation(expandir = false, onClick = { expandir = !expandir })
+                Icon(
+                    imageVector =
+                    if (expandir)
+                        Icons.Filled.KeyboardArrowUp
+                    else
+                        Icons.Filled.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = Color(0, 0, 0),
+                    modifier = Modifier
+                        .clickable {expandir = !expandir}
+                )
             }
 
             if (expandir == true) {
@@ -189,23 +200,4 @@ fun ClassDiaryStructure() {
 
     }
 
-}
-
-@Composable
-fun ExpandInformation(
-    expandir: Boolean,
-    onClick: () -> Unit
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = Modifier
-    ) {
-        Icon(
-            imageVector =
-            if (expandir) Icons.Filled.KeyboardArrowUp
-            else Icons.Filled.KeyboardArrowDown,
-            contentDescription = null,
-            tint = Color(0, 0, 0)
-        )
-    }
 }
