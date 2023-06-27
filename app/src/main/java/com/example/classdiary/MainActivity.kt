@@ -75,7 +75,6 @@ fun AppClassDiary() {
     ClassDiaryStructure()
 }
 
-@Preview
 @Composable
 fun ClassDiaryStructure() {
 
